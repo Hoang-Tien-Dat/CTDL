@@ -1,0 +1,35 @@
+package lab_1;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class task1_1 {
+public int[] mirror(int[] arr) {
+	int[] mirroredArr = new int[arr.length * 2];
+	int index = 0;
+			
+	for (int i = arr.length - 1;i>=0; i--) {
+		mirroredArr[index++] = arr[i];
+	}	
+	for (int i = 0; i< arr.length; i++) {
+		mirroredArr[index++] = arr[i];
+	}
+   
+	return mirroredArr;
+}
+public int [] removeDuplicates(int[] arr) {
+	Set<Integer> uniqueElements = new LinkedHashSet<>();
+	for (int num : arr) {
+		uniqueElements.add(num);
+}
+	int[] result = new int[uniqueElements.size()];
+	int index = 0;
+	
+	for (int num : uniqueElements) {
+		result[index++] = num;
+	}
+	return result;
+     }
+}
+	
+		

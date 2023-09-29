@@ -1,0 +1,101 @@
+package lab_1;
+
+	import java.util.ArrayList;
+	import java.util.List;
+
+	public class MyArray {
+	    private int[] inputArray;
+
+	    public MyArray(int[] inputArray) {
+	        this.inputArray = inputArray;
+	    }
+
+	    public int[] getMissingValues() {
+	        int min = Integer.MAX_VALUE;
+	        int max = Integer.MIN_VALUE;
+
+	        for (int num : inputArray) {
+	            min = Math.min(min, num);
+	            max = Math.max(max, num);
+	        }
+
+	        List<Integer> missingValues = new ArrayList<>();
+
+	        for (int i = min + 1; i < max; i++) {
+	            boolean found = false;
+
+	            for (int num : inputArray) {
+	                if (num == i) {
+	                    found = true;
+	                    break;
+	                }
+	            }
+
+	            if (!found) {
+	                missingValues.add(i);
+	            }
+	        }
+
+	        int[] result = new int[missingValues.size()];
+
+	        for (int i = 0; i < missingValues.size(); i++) {
+	            result[i] = missingValues.get(i);
+	        }
+
+	        return result;
+	    }
+
+	    public int[] fillMissingValues(int k) {
+	        int[] result = new int[inputArray.length];
+	        result[0] = inputArray[0];
+
+	        for (int i = 1; i < inputArray.length; i++) {
+	            if (inputArray[i] == -1) {
+	                result[i] = result[i - 1];
+	                for (int j = 1; j < k; j++) {
+	                    result[i + j] = result[i - 1];
+	                }
+	            } else {
+	                result[i] = inputArray[i];
+	            }
+	        }
+
+	        return result;
+	    }
+
+	    public static void main(String[] args) {
+	        int[] inputArray = {10, 11, 12, 13, 14, 16, 17, 19, 20};
+	        MyArray myArray = new MyArray(inputArray);
+
+	        int[] missingValues = myArray.getMissingValues();
+	        System.out.println("Missing values: ");
+	        for (int value : missingValues) {
+	            System.out.print(value + " ");
+	        }
+	        System.out.println();
+
+	        int[] filledArray = myArray.fillMissingValues(3);
+	        System.out.println("Filled array: ");
+	        for (int value : filledArray) {
+	            System.out.print(value + " ");
+	        }
+	        System.out.println();
+	    }
+	
+	public static void main1( String[] args) {
+		int[] inputArray = {10, 11, 12, -1, 14, 10, 17, 19, 20};
+		MyArray myArray = new MyArray(inputArray);
+
+		int[] filledArray = myArray.fillMissingValues(3);
+		System.out.println("Filled array: ");
+		for (int value : filledArray) {
+		    System.out.print(value + " ");
+		}
+		System.out.println(); 
+	}
+}	
+		
+	
+
+
+
